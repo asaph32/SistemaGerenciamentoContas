@@ -1,0 +1,133 @@
+import 'dart:io';
+
+void main() {
+  SistemaDeGerenciamentoDeContas sistemaDeGerenciamentoDeContas =
+      SistemaDeGerenciamentoDeContas();
+  sistemaDeGerenciamentoDeContas.menuDeOpcoes();
+
+  IncluirCliente incluirCliente = IncluirCliente("Asaph", "08912710311");
+  incluirCliente.dadosCliente();
+
+  IncluirConta incluirConta = IncluirConta("Asaph", "08912710311", 111, 987);
+  incluirConta.DadosConta();
+
+  ListarClientes listarClientes = ListarClientes("Asaph", "08912710311");
+  listarClientes.ListagemDeCliente();
+
+  RealizarDeposito realizarDeposito =
+      RealizarDeposito("Asaph", "08912710311", 111, 987, 460);
+  realizarDeposito.realizarDeposito();
+
+  RealizarSaque realizarSaque =
+      RealizarSaque("Asaph", "08912710311", 111, 987, 460, 100);
+  realizarSaque.realizarSaque();
+}
+
+class SistemaDeGerenciamentoDeContas {
+  void menuDeOpcoes() {
+    print("----------------------------------");
+    print("Sistema de Gerenciamento de Contas");
+    print("----------------------------------");
+    print("1. Incluir Cliente");
+    print("2. Incluir Conta");
+    print("3. Listar Clientes");
+    print("4. Listar Contas");
+    print("5. Realizar Deposito");
+    print("6. Realizar Saque");
+    print("9. Sair");
+  }
+}
+
+class IncluirCliente {
+  IncluirCliente(this.nomeCliente, this.cpfCliente);
+  String? nomeCliente;
+  String? cpfCliente;
+  void dadosCliente() {
+    print("Dados do Cliente");
+    print("--------------------------");
+    print("Nome do Cliente : $nomeCliente");
+    print("CPF do Cliente : $cpfCliente");
+  }
+}
+
+class IncluirConta extends IncluirCliente {
+  IncluirConta(
+      String nomeCliente, String cpfCliente, this.numAgencia, this.numConta)
+      : super(nomeCliente, cpfCliente);
+  int? numAgencia;
+  int? numConta;
+
+  void DadosConta() {
+    print("Dados da Conta");
+    print("------------------------------");
+    print("Numero da Agência : $numAgencia");
+    print("Numero da Conta : $numConta");
+    print("CPF do Cliente : $cpfCliente");
+  }
+}
+
+class ListarClientes extends IncluirCliente {
+  ListarClientes(String nomeCliente, String cpfCliente)
+      : super(nomeCliente, cpfCliente);
+  void ListagemDeCliente() {
+    print("+ ----------------------------------- +");
+    print("+       Listagem de Clientes          +");
+    print("+-------------------------------------+");
+    print("|$nomeCliente        |$cpfCliente     |");
+    print("|                    |                |");
+    print("|                    |                |");
+    print("|                    |                |");
+    print("|                    |                |");
+    print("|                    |                |");
+    print("|                    |                |");
+    print("+-------------------------------------+");
+  }
+}
+
+class RealizarDeposito extends IncluirConta {
+  double? saldo;
+  RealizarDeposito(String nomeCliente, String cpfCliente, int numAgencia,
+      int numConta, this.saldo)
+      : super(nomeCliente, cpfCliente, numAgencia, numConta);
+
+  void realizarDeposito() {
+    print(
+        "+--------------------------------------------------------------------------------------------+");
+    print(
+        "+                   LISTAGEM DE CONTAS                                                       +");
+    print(
+        "+--------------------------------------------------------------------------------------------+");
+    print(
+        "| Agência    | Conta                  |          CPF              |         Saldo            |");
+    print(
+        "|$numAgencia |        $numConta       |       $cpfCliente         |         $saldo           |");
+    print(
+        "|            |                        |                           |                          |");
+    print(
+        "|            |                        |                           |                          |");
+    print(
+        "|            |                        |                           |                          |");
+    print(
+        "|            |                        |                           |                          |");
+    print(
+        "+--------------------------------------------------------------------------------------------+");
+  }
+}
+
+class RealizarSaque extends RealizarDeposito {
+  double? resFinal;
+  double? saque;
+  RealizarSaque(String nomeCliente, String cpfCliente, int numAgencia,
+      int numConta, double saldo, this.saque)
+      : super(nomeCliente, cpfCliente, numAgencia, numConta, saldo);
+  void realizarSaque() {
+    print("REALIZANDO  SAQUE");
+    if (saque! <= saldo!) {
+      resFinal = saldo! -saque!;
+    } else {
+      print("Impossivel sacar");
+    }
+
+    print("Agr a quantia é de : $resFinal reais");
+  }
+}
