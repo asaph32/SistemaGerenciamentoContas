@@ -1,0 +1,79 @@
+class SistemaGerenciamentoDeContas:
+    def __init__(self,nome,cpf):
+        self.nome = nome
+        self.cpf = cpf
+
+    def menuDeOpcoes(self):
+        print("1. Incluir Cliente")
+        print("2. Incluir Conta")
+        print("3. Listar Clientes")
+        print("4. Listar Contas")
+        print("5. Realizar Deposito")
+        print("6. Realizar Saque")
+
+        print("\n")
+
+    def IncluirCliente(self):
+        print("Dados do Cliente")
+        print("------------------------------------")
+        print(f"Nome do Cliente : {self.nome}")
+        print(f"CPF do Cliente : {self.cpf}")
+
+        print("\n")
+
+    def IncluirConta(self,numAgencia,numConta):
+        print("Dados da conta")
+        print("-----------------------")
+        self.numAgencia = numAgencia
+        self.numConta = numConta
+        print(f"Numero da Agencia : {self.numAgencia}")
+        print(f"Numero da Conta : {self.numConta}")
+        print(f"CPF do Cliente : {self.cpf}")
+
+        print("\n")
+
+    def ListarClientes(self):
+        print("***** LISTA DE CLIENTES ********")
+        print("Nome -----------------CPF")
+        print(f"{self.nome}--------{self.cpf}")
+
+        print("\n")
+
+    def listarContas(self,saldo):
+        self.saldo = saldo
+        print("***** LISTAGEM DE CONTAS ******")
+        print(f"Agencia ---------- Conta --------- CPF -------- Saldo")
+        print(f"{self.numAgencia}                {self.numConta}          {self.cpf}    {self.saldo}")
+
+        print("\n")
+
+    def realizarDeposito(self,depositar):
+        self.depositar = depositar
+        self.saldo = self.depositar + self.saldo
+        print(f"Quantia total na Conta é de R$ {self.saldo} Reais")
+
+
+        print("\n")
+
+    def realizarSaque(self,sacar):
+        self.sacar = sacar
+        if self.sacar < self.saldo:
+            self.saldo = self.saldo - self.sacar
+            print(f"Agora a quantia é de R$ {self.saldo} Reais")
+        else:
+            raise Exception("Impossivel realizar o Saque...Tente Novamente!!")
+
+
+
+
+
+
+
+cliente = SistemaGerenciamentoDeContas("Asaph","08912710311")
+cliente.menuDeOpcoes()
+cliente.IncluirCliente()
+cliente.IncluirConta("3333","987")
+cliente.ListarClientes()
+cliente.listarContas(2500)
+cliente.realizarDeposito(50)
+cliente.realizarSaque(30)
